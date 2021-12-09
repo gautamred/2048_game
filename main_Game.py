@@ -159,31 +159,56 @@ class Grid:
             print("--------------------")
 
 
-
-gameGrid = Grid()
-gameGrid.addRandom()
-gameGrid.addRandom()
-gameGrid.printGrid()
-
-while(gameGrid.isGridFull == 0):
-    prevState = deepcopy(gameGrid.grid)
-    print("Enter direction: ")
-    ip = int(input())
-    if ip == 1:
-        gameGrid.swipeLeft()
-    elif ip==2:
-        gameGrid.swipeRight()
-    elif ip==3:
-        gameGrid.swipeUp()
-    elif ip==4:
-        gameGrid.swipeDown()
-    
-    if gameGrid.grid == prevState:
-        print(prevState)
-        gameGrid.printGrid()
+print("---------------WELCOME!---------------")
+print("1) PLAY")
+print("2) EXIT")
+while True:  
+    try:
+        option = int(input())
+    except ValueError:
+        print("Provide valid option")
         continue
-    gameGrid.endGame()
+    if option == 1 or option == 2:
+        break
+    else:
+        print("Provide valid option")
+
+if option == 1:
+    print("CONTROLS\n1) Moves the cells left\n2) Moves the cells right\n3) Moves the cells up\n4) Moves the cells down")
+    gameGrid = Grid()
+    gameGrid.addRandom()
     gameGrid.addRandom()
     gameGrid.printGrid()
 
+    while(gameGrid.isGridFull == 0):
+        prevState = deepcopy(gameGrid.grid)
+        print("Enter direction: ")
+        try:
+            ip = int(input())
+        except ValueError:
+            print("Invalid input! Please provide a number from 1 to 4")
+            continue
+        if ip == 1:
+            gameGrid.swipeLeft()
+        elif ip==2:
+            gameGrid.swipeRight()
+        elif ip==3:
+            gameGrid.swipeUp()
+        elif ip==4:
+            gameGrid.swipeDown()
+        else:
+            gameGrid.printGrid()
+            continue
+        
+        if gameGrid.grid == prevState:
+            print(prevState)
+            gameGrid.printGrid()
+            continue
+        gameGrid.endGame()
+        gameGrid.addRandom()
+        gameGrid.printGrid()
+
+elif option == 2:
+    print("------THANK YOU FOR PLAYING!------")
+    pass
             
